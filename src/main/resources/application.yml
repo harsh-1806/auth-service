@@ -1,0 +1,4 @@
+#spring.application.name=expense-tracker-backend
+spring:
+  application:
+    name: expense-tracker-backend
