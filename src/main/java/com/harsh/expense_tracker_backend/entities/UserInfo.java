@@ -15,11 +15,11 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
-    private Long userId;
+    @Column(name = "user_id")
+    private String userId;
 
-    private String userName;
+    @Column(name="user_name")
+    private String username;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
