@@ -1,1 +1,1 @@
-### Expense Tracker Backend
+### Expense Tracker Auth Service
