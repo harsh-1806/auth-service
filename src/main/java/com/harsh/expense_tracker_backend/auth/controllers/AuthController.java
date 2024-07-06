@@ -1,19 +1,21 @@
-package com.harsh.expense_tracker_backend.controller;
+package com.harsh.expense_tracker_backend.auth.controllers;
 
-import com.harsh.expense_tracker_backend.entities.RefreshToken;
-import com.harsh.expense_tracker_backend.model.UserInfoDto;
-import com.harsh.expense_tracker_backend.response.JwtResponseDTO;
-import com.harsh.expense_tracker_backend.service.JwtService;
-import com.harsh.expense_tracker_backend.service.RefreshTokenService;
-import com.harsh.expense_tracker_backend.service.UserDetailServiceImpl;
+import com.harsh.expense_tracker_backend.auth.entities.RefreshToken;
+import com.harsh.expense_tracker_backend.auth.model.UserInfoDto;
+import com.harsh.expense_tracker_backend.auth.responses.JwtResponseDTO;
+import com.harsh.expense_tracker_backend.auth.service.JwtService;
+import com.harsh.expense_tracker_backend.auth.service.RefreshTokenService;
+import com.harsh.expense_tracker_backend.auth.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("auth/v1")
 public class AuthController {
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
@@ -26,7 +28,7 @@ public class AuthController {
         this.userDetailService = userDetailService;
     }
 
-    @PostMapping("auth/v1/signup")
+    @PostMapping("/signup")
     public ResponseEntity signUp(
             @RequestBody
             UserInfoDto userInfoDto

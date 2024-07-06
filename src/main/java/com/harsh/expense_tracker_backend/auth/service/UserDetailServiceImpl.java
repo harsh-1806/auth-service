@@ -1,8 +1,10 @@
-package com.harsh.expense_tracker_backend.service;
+package com.harsh.expense_tracker_backend.auth.service;
 
-import com.harsh.expense_tracker_backend.entities.UserInfo;
-import com.harsh.expense_tracker_backend.model.UserInfoDto;
-import com.harsh.expense_tracker_backend.respository.UserRepository;
+import com.harsh.expense_tracker_backend.auth.entities.UserInfo;
+import com.harsh.expense_tracker_backend.auth.model.UserInfoDto;
+import com.harsh.expense_tracker_backend.auth.respositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,11 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserDetailServiceImpl.class);
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -39,19 +43,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     }
 
     public Boolean signupUser(UserInfoDto userInfoDto) {
-        userInfoDto.setPassword(passwordEncoder.encode(userInfoDto.getUsername()));
-
-        if(checkIfUserExists(userInfoDto) != null) {
+        userInfoDto.setPassword(passwordEncoder.encode(userInfoDto.getPassword()));
+        if(Objects.nonNull(checkIfUserExists(userInfoDto))){
             return false;
         }
-
         String userId = UUID.randomUUID().toString();
-
-        userRepository.save(new UserInfo(userId,
-                userInfoDto.getUsername(),
-                userInfoDto.getPassword(),
-                new HashSet<>()));
-
+        userRepository.save(new UserInfo(userId, userInfoDto.getUsername(), userInfoDto.getPassword(), new HashSet<>()));
         return true;
     }
 }

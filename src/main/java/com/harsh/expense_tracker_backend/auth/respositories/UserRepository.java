@@ -1,6 +1,6 @@
-package com.harsh.expense_tracker_backend.respository;
+package com.harsh.expense_tracker_backend.auth.respositories;
 
-import com.harsh.expense_tracker_backend.entities.UserInfo;
+import com.harsh.expense_tracker_backend.auth.entities.UserInfo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

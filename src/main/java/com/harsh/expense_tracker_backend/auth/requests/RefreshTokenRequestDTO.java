@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend.request;
+package com.harsh.expense_tracker_backend.auth.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

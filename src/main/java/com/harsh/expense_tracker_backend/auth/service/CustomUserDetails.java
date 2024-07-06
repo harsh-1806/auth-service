@@ -1,6 +1,6 @@
-package com.harsh.expense_tracker_backend.service;
+package com.harsh.expense_tracker_backend.auth.service;
 
-import com.harsh.expense_tracker_backend.entities.UserInfo;
+import com.harsh.expense_tracker_backend.auth.entities.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
