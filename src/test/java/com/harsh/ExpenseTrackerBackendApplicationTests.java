@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend;
+package com.harsh;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

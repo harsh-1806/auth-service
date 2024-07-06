@@ -1,8 +1,8 @@
-package com.harsh.expense_tracker_backend.auth.service;
+package com.harsh.auth.services;
 
-import com.harsh.expense_tracker_backend.auth.entities.UserInfo;
-import com.harsh.expense_tracker_backend.auth.model.UserInfoDto;
-import com.harsh.expense_tracker_backend.auth.respositories.UserRepository;
+import com.harsh.auth.respositories.UserRepository;
+import com.harsh.auth.entities.UserInfo;
+import com.harsh.auth.model.UserInfoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

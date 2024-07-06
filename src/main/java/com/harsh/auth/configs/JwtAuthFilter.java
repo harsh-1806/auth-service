@@ -1,7 +1,7 @@
-package com.harsh.expense_tracker_backend.auth.configs;
+package com.harsh.auth.configs;
 
-import com.harsh.expense_tracker_backend.auth.service.JwtService;
-import com.harsh.expense_tracker_backend.auth.service.UserDetailServiceImpl;
+import com.harsh.auth.services.JwtService;
+import com.harsh.auth.services.UserDetailServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

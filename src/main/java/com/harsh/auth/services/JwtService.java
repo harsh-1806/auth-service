@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend.auth.service;
+package com.harsh.auth.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

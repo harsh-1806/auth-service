@@ -1,6 +1,6 @@
-package com.harsh.expense_tracker_backend.auth.configs;
+package com.harsh.auth.configs;
 
-import com.harsh.expense_tracker_backend.auth.service.UserDetailServiceImpl;
+import com.harsh.auth.services.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

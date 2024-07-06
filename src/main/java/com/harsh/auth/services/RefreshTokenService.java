@@ -1,9 +1,9 @@
-package com.harsh.expense_tracker_backend.auth.service;
+package com.harsh.auth.services;
 
-import com.harsh.expense_tracker_backend.auth.entities.RefreshToken;
-import com.harsh.expense_tracker_backend.auth.entities.UserInfo;
-import com.harsh.expense_tracker_backend.auth.respositories.RefreshTokenRepository;
-import com.harsh.expense_tracker_backend.auth.respositories.UserRepository;
+import com.harsh.auth.entities.RefreshToken;
+import com.harsh.auth.entities.UserInfo;
+import com.harsh.auth.respositories.RefreshTokenRepository;
+import com.harsh.auth.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

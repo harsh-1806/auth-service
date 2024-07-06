@@ -1,11 +1,11 @@
-package com.harsh.expense_tracker_backend.auth.controllers;
+package com.harsh.auth.controllers;
 
-import com.harsh.expense_tracker_backend.auth.entities.RefreshToken;
-import com.harsh.expense_tracker_backend.auth.requests.AuthRequestDTO;
-import com.harsh.expense_tracker_backend.auth.requests.RefreshTokenRequestDTO;
-import com.harsh.expense_tracker_backend.auth.responses.JwtResponseDTO;
-import com.harsh.expense_tracker_backend.auth.service.JwtService;
-import com.harsh.expense_tracker_backend.auth.service.RefreshTokenService;
+import com.harsh.auth.requests.AuthRequestDTO;
+import com.harsh.auth.requests.RefreshTokenRequestDTO;
+import com.harsh.auth.responses.JwtResponseDTO;
+import com.harsh.auth.services.RefreshTokenService;
+import com.harsh.auth.entities.RefreshToken;
+import com.harsh.auth.services.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

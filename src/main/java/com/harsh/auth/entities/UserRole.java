@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend.auth.entities;
+package com.harsh.auth.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

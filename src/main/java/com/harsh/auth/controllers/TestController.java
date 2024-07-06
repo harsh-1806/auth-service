@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend.auth.controllers;
+package com.harsh.auth.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

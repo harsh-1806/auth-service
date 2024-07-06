@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend.auth.configs;
+package com.harsh.auth.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

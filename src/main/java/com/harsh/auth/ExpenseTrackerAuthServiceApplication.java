@@ -1,13 +1,13 @@
-package com.harsh.expense_tracker_backend;
+package com.harsh.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ExpenseTrackerBackendApplication {
+public class ExpenseTrackerAuthServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExpenseTrackerBackendApplication.class, args);
+		SpringApplication.run(ExpenseTrackerAuthServiceApplication.class, args);
 	}
 
 }

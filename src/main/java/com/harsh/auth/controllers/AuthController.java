@@ -1,11 +1,11 @@
-package com.harsh.expense_tracker_backend.auth.controllers;
+package com.harsh.auth.controllers;
 
-import com.harsh.expense_tracker_backend.auth.entities.RefreshToken;
-import com.harsh.expense_tracker_backend.auth.model.UserInfoDto;
-import com.harsh.expense_tracker_backend.auth.responses.JwtResponseDTO;
-import com.harsh.expense_tracker_backend.auth.service.JwtService;
-import com.harsh.expense_tracker_backend.auth.service.RefreshTokenService;
-import com.harsh.expense_tracker_backend.auth.service.UserDetailServiceImpl;
+import com.harsh.auth.responses.JwtResponseDTO;
+import com.harsh.auth.services.RefreshTokenService;
+import com.harsh.auth.entities.RefreshToken;
+import com.harsh.auth.model.UserInfoDto;
+import com.harsh.auth.services.JwtService;
+import com.harsh.auth.services.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity signUp(
+    public ResponseEntity<?> signUp(
             @RequestBody
             UserInfoDto userInfoDto
     ) {

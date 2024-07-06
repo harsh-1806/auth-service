@@ -1,4 +1,4 @@
-package com.harsh.expense_tracker_backend.auth.model;
+package com.harsh.auth.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
