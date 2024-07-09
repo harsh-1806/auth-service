@@ -2,15 +2,23 @@ package com.harsh.auth.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.harsh.auth.entities.UserInfo;
+import lombok.*;
+import org.springframework.stereotype.Service;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@Data
+@Getter
+@Setter
+@Service
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfoDto {
-    private String username;
-    private String password;
+@Builder
+public class UserInfoDto extends UserInfo {
+    @NonNull
+    private String firstName;
+    @NonNull
+    private String lastName;
+
+    private Long phoneNumber;
+    private String email;
 }

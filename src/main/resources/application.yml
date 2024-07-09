@@ -10,9 +10,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Kafka Properties
+  kafka:
+    producer:
+      bootstrap-servers: 35.207.194.224:9092
+      value-serializer: "com.harsh.auth.serializer.UserInfoSerializer"
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+    topic:
+      name: test_json
+
 server:
   port: 8080
 logging:
@@ -21,3 +28,5 @@ logging:
       springframework:
         security:
           DEBUG
+
+
