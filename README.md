@@ -10,10 +10,15 @@
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Running Tests](#running-tests)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- [To-do](#To-do)
+
+[//]: # (- [Running Tests]&#40;#running-tests&#41;)
+
+[//]: # (- [Contributing]&#40;#contributing&#41;)
+
+[//]: # (- [License]&#40;#license&#41;)
+
+[//]: # (- [Contact]&#40;#contact&#41;)
 
 ## Introduction
 AuthService is a microservice responsible for handling user authentication and authorization in the Expense Tracker application. It manages user registration, login, JWT token generation, and validation.
@@ -43,8 +48,8 @@ AuthService is a microservice responsible for handling user authentication and a
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/harsh-1806/expense-tracker-auth-service.git
-    cd expense-tracker-auth-service
+    git clone https://github.com/harsh-1806/auth-service.git
+    cd auth-service
     ```
 
 2. **Set up PostgreSQL**:
@@ -52,7 +57,6 @@ AuthService is a microservice responsible for handling user authentication and a
     - Create a database for the service.
 
 3. **Configure environment variables**:
-    - Create a `.env` file in the root directory.
     - Add the necessary configuration variables (see Configuration section).
 
 4. **Build and run the application**:
@@ -62,16 +66,20 @@ AuthService is a microservice responsible for handling user authentication and a
     ```
 
 ### Configuration
-Create a `.env` file with the following variables:
-
+#### Environment Variables
+(With Default Values)
 ```plaintext
-SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/yourdatabase
-SPRING_DATASOURCE_USERNAME=yourusername
-SPRING_DATASOURCE_PASSWORD=yourpassword
-JWT_SECRET=yourjwtsecret
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=root
+POSTGRES_PASSWORD='password'
+POSTGRES_DB=auth_db
+KAFKA_HOST=localhost
+KAFKA_PORT=9092
+AUTH_SERVICE_PORT=9898
 ```
 ### Usage
-After starting the service, you can use the following endpoints to register and log in users.
+After starting the service, you can use the following endpoints to register and authenticate users.
 
 ### API Endpoints
 #### User registration
@@ -79,5 +87,43 @@ After starting the service, you can use the following endpoints to register and 
 - Method : `POST`
 - Request Body :
 ```json
-
+{
+    "username": "username51",
+    "password": "123345678",
+    "first_name": "yourFirstName",
+    "last_name": "yourLastName",
+    "phone_number": "1234567890",
+    "email": "harsh@google.com"
+}
 ```
+- Response Body :
+```json
+{
+    "accessToken": "yourAccessToken",
+    "token": "yourTokenId"
+}
+```
+#### User Login
+- Endpoint : `api/v1/login`
+- Method : `POST`
+- Request Body :
+```json
+{
+    "username": "username51",
+    "password": "123345678"
+}
+```
+- Response Body :
+```json
+{
+    "accessToken": "yourAccessToken",
+    "token": "yourTokenId"
+}
+```
+## To-do
+- [ ] Write some Tests
+- [ ] Update End-Point for Profile Pic
+- [ ] Standardized DTOs
+- [ ] Implement Authorization
+- [ ] API Documentation
+
