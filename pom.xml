@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.harsh</groupId>
-	<artifactId>expense-tracker-backend</artifactId>
+	<artifactId>auth-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>expense-tracker-backend</name>
-	<description>Expense Tracker Backend</description>
+	<name>auth-service</name>
+	<description>Auth Service</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.2</spring-cloud.version>
