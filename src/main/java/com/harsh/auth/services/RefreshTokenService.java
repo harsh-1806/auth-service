@@ -14,8 +14,8 @@ import java.util.UUID;
 @Service
 public class RefreshTokenService {
 
-    UserRepository userRepository;
-    RefreshTokenRepository refreshTokenRepository;
+    private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
     public RefreshTokenService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository) {
@@ -29,7 +29,7 @@ public class RefreshTokenService {
         RefreshToken refreshToken = RefreshToken.builder()
                 .userInfo(userInfoExtracted)
                 .token(UUID.randomUUID().toString())
-                .expiryDate(Instant.now().plusMillis(600000))
+                .expiryDate(Instant.now().plusMillis(600 * 1000))
                 .build();
 
         return refreshTokenRepository.save(refreshToken);

@@ -1,32 +1,37 @@
-#spring.application.name=expense-tracker-backend
 spring:
   application:
     name: expense-tracker-backend
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/authservice
-    password: password
-    username: postgres
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:auth_db}
+    username: ${POSTGRES_USER:root}
+    password: ${POSTGRES_PASSWORD:password}
   jpa:
     hibernate:
       ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   # Kafka Properties
   kafka:
+    bootstrap-servers: ${KAFKA HOST:localhost}:${KAFKA_PORT:9092}
     producer:
-      bootstrap-servers: 35.207.194.224:9092
-      value-serializer: "com.harsh.auth.serializer.UserInfoSerializer"
-      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: com.harsh.auth.serializer.UserInfoSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        spring:
+          json:
+            type:
+              mapping:
+                auth:com.harsh.auth.eventProducer
     topic:
-      name: test_json
+      name: user_service
 
 server:
-  port: 8080
+  port: ${AUTH_SERVICE_PORT:9898}
+
 logging:
   level:
-    org:
-      springframework:
-        security:
-          DEBUG
-
+    org.apache.kafka: debug
 

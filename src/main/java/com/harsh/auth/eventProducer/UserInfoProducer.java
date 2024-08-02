@@ -21,9 +21,9 @@ public class UserInfoProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendEventToKafka(UserInfoDto userInfoDto) {
-        Message<UserInfoDto> message = MessageBuilder
-                .withPayload(userInfoDto)
+    public void sendEventToKafka(UserInfoEvent userInfoEvent) {
+        Message<UserInfoEvent> message = MessageBuilder
+                .withPayload(userInfoEvent)
                 .setHeader(KafkaHeaders.TOPIC, TOPIC_NAME)
                 .build();
         kafkaTemplate.send(message);

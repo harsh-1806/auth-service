@@ -1,24 +1,21 @@
-package com.harsh.auth.model;
+package com.harsh.auth.eventProducer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.harsh.auth.entities.UserInfo;
-import lombok.*;
-import org.springframework.stereotype.Service;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Getter
 @Setter
-@Service
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class UserInfoDto extends UserInfo {
-    @NonNull
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserInfoEvent {
     private String firstName;
-    @NonNull
     private String lastName;
-
-    private String phoneNumber;
     private String email;
+    private String phoneNumber;
+    private String userId;
 }

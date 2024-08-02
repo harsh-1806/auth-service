@@ -1,5 +1,6 @@
 package com.harsh.auth.services;
 
+import com.harsh.auth.eventProducer.UserInfoEvent;
 import com.harsh.auth.eventProducer.UserInfoProducer;
 import com.harsh.auth.respositories.UserRepository;
 import com.harsh.auth.entities.UserInfo;
@@ -20,7 +21,6 @@ import java.util.UUID;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserDetailServiceImpl.class);
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserInfoProducer userInfoProducer;
@@ -48,15 +48,34 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public Boolean signupUser(UserInfoDto userInfoDto) {
         // hashing the user's password
         userInfoDto.setPassword(passwordEncoder.encode(userInfoDto.getPassword()));
-        if(Objects.nonNull(checkIfUserExists(userInfoDto))){
-            return false;
+        if(checkIfUserExists(userInfoDto) != null){
+            return Boolean.FALSE;
         }
         String userId = UUID.randomUUID().toString();
-        userRepository.save(new UserInfo(userId, userInfoDto.getUsername(), userInfoDto.getPassword(), new HashSet<>()));
+        userInfoDto.setUserId(userId);
+        UserInfo user = new UserInfo
+                (
+                        userId,
+                        userInfoDto.getUsername(),
+                        userInfoDto.getPassword(),
+                        new HashSet<>()
+                );
+
+        userRepository.save(user);
 
         //pushEventToMessagingService
-        userInfoProducer.sendEventToKafka(userInfoDto);
+
+        userInfoProducer.sendEventToKafka(userInfoToPublish(userInfoDto));
 
         return true;
+    }
+    private UserInfoEvent userInfoToPublish(UserInfoDto userInfoDto) {
+        return UserInfoEvent.builder()
+                .userId(userInfoDto.getUserId())
+                .firstName(userInfoDto.getFirstName())
+                .lastName(userInfoDto.getLastName())
+                .email(userInfoDto.getEmail())
+                .phoneNumber(userInfoDto.getPhoneNumber())
+                .build();
     }
 }
