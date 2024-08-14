@@ -22,6 +22,7 @@
 
 ## Introduction
 AuthService is a microservice responsible for handling user authentication and authorization in the Expense Tracker application. It manages user registration, login, JWT token generation, and validation.
+Based on [Lovepreet Singh's](https://github.com/AlphaDecodeX) YT Playlist.
 
 ## Features
 - User registration and login
@@ -68,7 +69,7 @@ AuthService is a microservice responsible for handling user authentication and a
 ### Configuration
 #### Environment Variables
 (With Default Values)
-```plaintext
+```dosini
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 POSTGRES_USER=root
