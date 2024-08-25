@@ -9,13 +9,12 @@ import com.harsh.auth.services.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth/v1")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
@@ -34,17 +33,31 @@ public class AuthController {
             UserInfoDto userInfoDto
     ) {
         try {
-            Boolean isSignedUp = userDetailService.signupUser(userInfoDto);
-            if(Boolean.FALSE.equals(isSignedUp)) {
+            String userId = userDetailService.signupUser(userInfoDto);
+            if(userId == null) {
                 return new ResponseEntity<>("Already Exists!", HttpStatus.BAD_REQUEST);
             }
             RefreshToken refreshToken  = refreshTokenService.createRefreshToken(userInfoDto.getUsername());
             String jwtToken = jwtService.GenerateToken(userInfoDto.getUsername());
 
-            return new ResponseEntity<>(JwtResponseDTO.builder().accessToken(jwtToken).token(refreshToken.getToken()).build(), HttpStatus.OK);
+            return new ResponseEntity<>(JwtResponseDTO.builder().accessToken(jwtToken).token(refreshToken.getToken()).userId(userId).build(), HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>("Exception in User Service.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null && authentication.isAuthenticated()) {
+            String userId = userDetailService.getUserIdByUsername(authentication.getName());
+            if(userId != null) {
+                return new ResponseEntity<>(userId, HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
     }
 }

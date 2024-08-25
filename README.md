@@ -1,130 +1,103 @@
-# AuthService - Expense Tracker Application
+Here's an updated README for the Expense Tracker microservice:
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [To-do](#To-do)
+---
 
-[//]: # (- [Running Tests]&#40;#running-tests&#41;)
+# Expense Tracker Microservice
 
-[//]: # (- [Contributing]&#40;#contributing&#41;)
+## Overview
 
-[//]: # (- [License]&#40;#license&#41;)
-
-[//]: # (- [Contact]&#40;#contact&#41;)
-
-## Introduction
-AuthService is a microservice responsible for handling user authentication and authorization in the Expense Tracker application. It manages user registration, login, JWT token generation, and validation.
-Based on [Lovepreet Singh's](https://github.com/AlphaDecodeX) YT Playlist.
+This microservice is part of the Expense Tracker application, responsible for processing and handling expense-related data. It accepts incoming HTTP POST requests, processes the data using a custom service, and produces messages to a Kafka topic. This setup allows the application to handle expense tracking in a scalable and distributed manner.
 
 ## Features
-- User registration and login
-- JWT token generation
-- Token validation
-- Password hashing
 
-## Technologies Used
-- Spring Boot
-- PostgreSQL
-- JWT
-- Docker
-- Kafka
+- **Flask Framework:** Lightweight and efficient web server for handling API requests.
+- **Kafka Integration:** Produces processed expense data to a Kafka topic for further processing or storage.
+- **Custom Message Service:** Handles the business logic for processing expense data.
+- **Environment Configuration:** Uses environment variables for flexible configuration.
 
-## Getting Started
+## Tech Stack
 
-### Prerequisites
-- JDK 11 or higher (Used JDK 17)
-- Docker (optional, for containerization)
-- PostgreSQL
-- Kafka (optional, for delegating the UserInfo to UserService)
+- **Backend:** Flask (Python)
+- **Message Broker:** Apache Kafka
+- **Environment Management:** Python `dotenv`
 
-### Installation
+## Prerequisites
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/harsh-1806/auth-service.git
-    cd auth-service
-    ```
+Before running this microservice, ensure you have the following installed:
 
-2. **Set up PostgreSQL**:
-    - Ensure PostgreSQL is running.
-    - Create a database for the service.
+- [Python 3.8+](https://www.python.org/downloads/)
+- [Apache Kafka](https://kafka.apache.org/downloads)
+- [Zookeeper](https://zookeeper.apache.org/releases.html) (required for Kafka)
+- [Docker (optional)](https://docs.docker.com/get-docker/) for containerization
+- [pip](https://pip.pypa.io/en/stable/installation/) for Python package management
 
-3. **Configure environment variables**:
-    - Add the necessary configuration variables (see Configuration section).
+## Installation
 
-4. **Build and run the application**:
-    ```bash
-    ./mvnw clean install
-    ./mvnw spring-boot:run
-    ```
+### 1. Clone the Repository
 
-### Configuration
-#### Environment Variables
-(With Default Values)
-```dosini
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_USER=root
-POSTGRES_PASSWORD='password'
-POSTGRES_DB=auth_db
-KAFKA_HOST=localhost
-KAFKA_PORT=9092
-AUTH_SERVICE_PORT=9898
+```bash
+git clone https://github.com/your-username/expense-tracker-microservice.git
+cd expense-tracker-microservice
 ```
-### Usage
-After starting the service, you can use the following endpoints to register and authenticate users.
 
-### API Endpoints
-#### User registration
-- Endpoint : `api/v1/signup`
-- Method : `POST`
-- Request Body :
-```json
-{
-    "username": "username51",
-    "password": "123345678",
-    "first_name": "yourFirstName",
-    "last_name": "yourLastName",
-    "phone_number": "1234567890",
-    "email": "harsh@google.com"
-}
-```
-- Response Body :
-```json
-{
-    "accessToken": "yourAccessToken",
-    "token": "yourTokenId"
-}
-```
-#### User Login
-- Endpoint : `api/v1/login`
-- Method : `POST`
-- Request Body :
-```json
-{
-    "username": "username51",
-    "password": "123345678"
-}
-```
-- Response Body :
-```json
-{
-    "accessToken": "yourAccessToken",
-    "token": "yourTokenId"
-}
-```
-## To-do
-- [ ] Write some Tests
-- [ ] Update End-Point for Profile Pic
-- [ ] Standardized DTOs
-- [ ] Implement Authorization
-- [ ] API Documentation
+### 2. Set Up Environment Variables
 
+Create a `.env` file in the root directory of the project and add the following environment variables:
+
+```env
+SERVER_ADDRESS=<Your Kafka Server Address>
+```
+
+### 3. Install Dependencies
+
+Use `pip` to install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure Kafka and Zookeeper
+
+Ensure that Kafka and Zookeeper are running. You can use Docker to set them up quickly:
+
+```bash
+docker-compose up -d
+```
+
+### 5. Run the Microservice
+
+Start the Flask server:
+
+```bash
+python app.py
+```
+
+The microservice will run on `http://localhost:8000`.
+
+## API Endpoints
+
+- **POST /v1/ds/message** - Accepts a JSON payload with an expense message, processes it, and sends it to the Kafka topic `expense_service`.
+
+- **GET /** - A simple health check endpoint that returns "Hello, World".
+
+### Example Request
+
+```bash
+curl -X POST http://localhost:8000/v1/ds/message -H "Content-Type: application/json" -d '{"message": "Sample expense data"}'
+```
+
+## Contributing
+
+Contributions are welcome! Please fork this repository, create a new branch, and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any queries or issues, please contact Harsh Kumar at [helloharsh51@gmail.com](mailto:helloharsh51@gmail.com).
+
+---
+
+Feel free to adjust the details as necessary for your specific setup!
