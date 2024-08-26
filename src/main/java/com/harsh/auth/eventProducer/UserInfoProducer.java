@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserInfoProducer {
-    private final KafkaTemplate<String, UserInfoDto> kafkaTemplate;
+    private final KafkaTemplate<String, UserInfoEvent> kafkaTemplate;
 
     @Value("${spring.kafka.topic.name}")
     private String TOPIC_NAME;
 
     @Autowired
-    public UserInfoProducer(KafkaTemplate<String, UserInfoDto> kafkaTemplate) {
+    public UserInfoProducer(KafkaTemplate<String, UserInfoEvent> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
