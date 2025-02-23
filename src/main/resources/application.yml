@@ -6,12 +6,10 @@ spring:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:auth_db}
     username: ${POSTGRES_USER:root}
     password: ${POSTGRES_PASSWORD:password}
+
   jpa:
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   # Kafka Properties
   kafka:
@@ -19,19 +17,8 @@ spring:
     producer:
       value-serializer: com.harsh.auth.serializer.UserInfoSerializer
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      properties:
-        spring:
-          json:
-            type:
-              mapping:
-                auth:com.harsh.auth.eventProducer
     topic:
       name: user_service
 
 server:
   port: ${AUTH_SERVICE_PORT:9898}
-
-logging:
-  level:
-    org.apache.kafka: debug
-

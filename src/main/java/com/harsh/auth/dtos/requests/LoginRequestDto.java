@@ -1,5 +1,4 @@
-package com.harsh.auth.responses;
-
+package com.harsh.auth.dtos.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class JwtResponseDTO {
-    private String accessToken;
-    private String token;
-    private String userId;
+public class LoginRequestDto {
+    private String username;
+    private String password;
 }

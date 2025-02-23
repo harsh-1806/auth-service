@@ -1,11 +1,11 @@
 package com.harsh.auth.controllers;
 
-import com.harsh.auth.requests.AuthRequestDTO;
-import com.harsh.auth.requests.RefreshTokenRequestDTO;
-import com.harsh.auth.responses.JwtResponseDTO;
-import com.harsh.auth.services.RefreshTokenService;
+import com.harsh.auth.dtos.requests.LoginRequestDto;
+import com.harsh.auth.dtos.requests.RefreshTokenRequestDTO;
+import com.harsh.auth.dtos.responses.JwtResponseDTO;
+import com.harsh.auth.services.impl.RefreshTokenServiceImpl;
 import com.harsh.auth.entities.RefreshToken;
-import com.harsh.auth.services.JwtService;
+import com.harsh.auth.services.impl.JwtServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +23,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/auth")
 public class TokenController {
     private final AuthenticationManager authenticationManager;
-    private final RefreshTokenService refreshTokenService;
-    private final JwtService jwtService;
+    private final RefreshTokenServiceImpl refreshTokenService;
+    private final JwtServiceImpl jwtService;
 
     @Autowired
-    public TokenController(AuthenticationManager authenticationManager, RefreshTokenService refreshTokenService, JwtService jwtService, PasswordEncoder passwordEncoder) {
+    public TokenController(AuthenticationManager authenticationManager, RefreshTokenServiceImpl refreshTokenService, JwtServiceImpl jwtService, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.refreshTokenService = refreshTokenService;
         this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequestDTO authRequestDTO) {
+    public ResponseEntity<?> authenticateAndGetToken(@RequestBody LoginRequestDto authRequestDTO) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequestDTO.getUsername(), authRequestDTO.getPassword()));
@@ -43,7 +43,7 @@ public class TokenController {
                 RefreshToken refreshToken = refreshTokenService.createRefreshToken(authRequestDTO.getUsername());
 
                 return new ResponseEntity<>(JwtResponseDTO.builder()
-                        .accessToken(jwtService.GenerateToken(authRequestDTO.getUsername()))
+                        .accessToken(jwtService.generateToken(authRequestDTO.getUsername()))
                         .token(refreshToken.getToken())
                         .build(), HttpStatus.OK);
             } else {
@@ -65,7 +65,7 @@ public class TokenController {
                 .map(refreshTokenService::verifyExpiration)
                 .map(RefreshToken::getUserInfo)
                 .map(userInfo -> {
-                    String accessToken = jwtService.GenerateToken(userInfo.getUsername());
+                    String accessToken = jwtService.generateToken(userInfo.getUsername());
 
                     return JwtResponseDTO.builder()
                             .accessToken(accessToken)

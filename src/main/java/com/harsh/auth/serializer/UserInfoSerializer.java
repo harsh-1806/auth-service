@@ -3,7 +3,6 @@ package com.harsh.auth.serializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.harsh.auth.eventProducer.UserInfoEvent;
-import com.harsh.auth.model.UserInfoDto;
 import org.apache.kafka.common.serialization.Serializer;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
-package com.harsh.auth.model;
+package com.harsh.auth.dtos.requests;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.harsh.auth.entities.UserInfo;
+import com.harsh.auth.entities.User;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserInfoDto extends UserInfo {
+public class UserInfoDto extends User {
     @NonNull
     private String firstName;
     @NonNull

@@ -26,5 +26,5 @@ public class RefreshToken {
             name = "id",
             referencedColumnName = "user_id"
     )
-    private UserInfo userInfo;
+    private User userInfo;
 }

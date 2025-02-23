@@ -1,4 +1,4 @@
-package com.harsh.auth.requests;
+package com.harsh.auth.dtos.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,5 @@
 package com.harsh.auth.eventProducer;
 
-import com.harsh.auth.model.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -28,5 +27,4 @@ public class UserInfoProducer {
                 .build();
         kafkaTemplate.send(message);
     }
-
 }
